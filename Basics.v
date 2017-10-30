@@ -1323,37 +1323,37 @@ Qed.
         first converting it to unary and then incrementing. *)
 
 Inductive bin : Type :=
-  | O : bin
+  | P : bin
   | T : bin -> bin
   | U : bin -> bin.
 
 Fixpoint incr (b : bin) : bin :=
   match b with
-  | O => U O
+  | P => U P
   | T n' => U n'
   | U n' => T (incr n')
   end.
 
 Fixpoint bin_to_nat (b : bin) : nat :=
   match b with
-  | O => 0
+  | P => 0
   | T n' => (bin_to_nat n') * 2
   | U n' => (bin_to_nat n') * 2 + 1
   end.
 
-Example test_bin_incr1: bin_to_nat (incr O) = 1 + bin_to_nat O.
+Example test_bin_incr1: bin_to_nat (incr P) = 1 + bin_to_nat P.
 Proof. reflexivity. Qed.
 
-Example test_bin_incr2: bin_to_nat (incr (incr O)) = 1 + 1 + bin_to_nat O.
+Example test_bin_incr2: bin_to_nat (incr (incr P)) = 1 + 1 + bin_to_nat P.
 Proof. reflexivity. Qed.
 
-Example test_bin_incr3: bin_to_nat (incr (incr (incr O))) = 3 + bin_to_nat O.
+Example test_bin_incr3: bin_to_nat (incr (incr (incr P))) = 3 + bin_to_nat P.
 Proof. reflexivity. Qed.
 
-Example test_bin_incr4: bin_to_nat (incr (incr (incr (incr O)))) = 4 + bin_to_nat O.
+Example test_bin_incr4: bin_to_nat (incr (incr (incr (incr P)))) = 4 + bin_to_nat P.
 Proof. reflexivity. Qed.
 
-Example test_bin_incr5: bin_to_nat (incr (incr (incr (incr (incr O))))) = 5 + bin_to_nat O.
+Example test_bin_incr5: bin_to_nat (incr (incr (incr (incr (incr P))))) = 5 + bin_to_nat P.
 Proof. reflexivity. Qed.
 
 (** [] *)
